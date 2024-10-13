@@ -40,6 +40,7 @@ SEMAPHORE_ACCESS_KEY_ENCRYPTION_BASE64=$(echo -n "$SEMAPHORE_ACCESS_KEY_ENCRYPTI
 test -d runtime && echo ERROR remove ./runtime dir first
 test -d ./runtime && exit 1
 mkdir ./runtime
+chmod 700 ./runtime
 for y in *.yml
 do
   cp -av $y ./runtime/$y
