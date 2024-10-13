@@ -33,8 +33,10 @@ MYSQL_PASSWORD_BASE64=$(echo -n "$MYSQL_PASSWORD" | base64)
 SEMAPHORE_ADMIN_PASSWORD_BASE64=$(echo -n "$SEMAPHORE_ADMIN_PASSWORD" | base64)
 SEMAPHORE_ACCESS_KEY_ENCRYPTION_BASE64=$(echo -n "$SEMAPHORE_ACCESS_KEY_ENCRYPTION" | base64)
 
+```
 
-
+## create runtime config from template
+```
 test -d runtime && echo ERROR remove ./runtime dir first
 test -d ./runtime && exit 1
 mkdir ./runtime
@@ -70,6 +72,9 @@ SEMAPHORE_ACCESS_KEY_ENCRYPTION_BASE64=$SEMAPHORE_ACCESS_KEY_ENCRYPTION_BASE64
 
 ls -l ./runtime
 
+```
+## setup application
+```
 echo "
 DONE
 
