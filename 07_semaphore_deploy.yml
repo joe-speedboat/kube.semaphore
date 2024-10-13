@@ -1,0 +1,101 @@
+# semaphore-deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: semaphore
+  namespace: __NAMESPACE__
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: semaphore
+  template:
+    metadata:
+      labels:
+        app: semaphore
+    spec:
+      containers:
+        - name: semaphore
+          image: semaphoreui/semaphore:latest
+          env:
+            - name: SEMAPHORE_DB_USER
+              value: semaphore
+            - name: SEMAPHORE_DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: semaphore-secrets
+                  key: mysql-password
+            - name: SEMAPHORE_DB_HOST
+              value: mysql
+            - name: SEMAPHORE_WEB_ROOT
+              value: "https://__SEMAPHORE_HOSTNAME__"
+            - name: SEMAPHORE_USE_REMOTE_RUNNER
+              value: "True"
+            - name: ANSIBLE_HOST_KEY_CHECKING
+              value: "False"
+            - name: MAX_TASK_DURATION_SEC
+              value: "3600"
+            - name: SEMAPHORE_MAX_PARALLEL_TASKS
+              value: "10"
+            - name: SEMAPHORE_MAX_TASKS_PER_TEMPLATE
+              value: "100"
+            - name: SEMAPHORE_PORT
+              value: "3000"
+            - name: SEMAPHORE_DB_PORT
+              value: "3306"
+            - name: SEMAPHORE_DB_DIALECT
+              value: mysql
+            - name: SEMAPHORE_DB
+              value: semaphore
+            - name: SEMAPHORE_PLAYBOOK_PATH
+              value: /tmp/semaphore/
+            - name: SEMAPHORE_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: semaphore-secrets
+                  key: semaphore-admin-password
+            - name: SEMAPHORE_ADMIN_NAME
+              value: __SEMAPHORE_ADMIN_NAME__
+            - name: SEMAPHORE_ADMIN_EMAIL
+              value: __SEMAPHORE_ADMIN_EMAIL__
+            - name: SEMAPHORE_ADMIN
+              value: __SEMAPHORE_ADMIN__
+            - name: SEMAPHORE_ACCESS_KEY_ENCRYPTION
+              valueFrom:
+                secretKeyRef:
+                  name: semaphore-secrets
+                  key: semaphore-access-key-encryption
+            - name: SEMAPHORE_LDAP_ACTIVATED
+              value: 'no'
+            - name: TZ
+              value: UTC
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+            - name: semaphore-data
+              mountPath: /var/lib/semaphore
+            - name: semaphore-config
+              mountPath: /etc/semaphore
+            - name: semaphore-tmp-config
+              mountPath: /tmp/semaphore
+            - name: requirements
+              mountPath: /etc/semaphore/requirements.txt
+              subPath: requirements.txt
+
+      volumes:
+        - name: semaphore-tmp-config
+          emptyDir: {}
+        - name: semaphore-data
+          persistentVolumeClaim:
+            claimName: semaphore-data-pvc
+        - name: semaphore-config
+          persistentVolumeClaim:
+            claimName: semaphore-config-pvc
+        - name: requirements
+          configMap:
+            name: semaphore-requirements
+            items:
+              - key: requirements.txt
+                path: requirements.txt
+
+

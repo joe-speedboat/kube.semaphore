@@ -1,0 +1,54 @@
+# 11_semaphore_requirements_configmap.yml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: semaphore-requirements
+  namespace: __NAMESPACE__
+data:
+  requirements.txt: |
+    awxkit
+    ansible-pylibssh>=0.2.0  # For SSH-based connections (ansible.netcommon, community.network, cisco.asa)
+    boto3>=1.26.0  # For AWS modules (amazon.aws, community.aws)
+    botocore>=1.29.0  # For AWS modules (amazon.aws, community.aws)
+    cryptography  # Encryption-related tasks (hetzner.hcloud)
+    deepdiff  # Deep object comparison (netapp.ontap)
+    git+https://github.com/ansible/ansible-sign
+    google-auth  # Google Cloud authentication (google.cloud)
+    google-cloud-storage  # Google Cloud Storage API (google.cloud)
+    grpcio  # gRPC support (ansible.netcommon)
+    ipaddress  # IP address handling (netapp.ontap)
+    isodate  # ISO date parsing (netapp.ontap)
+    jmespath  # JSON queries (netapp.ontap)
+    jsonpatch  # JSON patching (kubernetes.core)
+    jsonschema  # JSON validation (ansible.utils)
+    jxmlease  # XML processing (ansible.netcommon, junipernetworks.junos)
+    kubernetes>=24.2.0  # Kubernetes interaction (community.okd, kubernetes.core)
+    ncclient  # NETCONF client (ansible.netcommon, junipernetworks.junos)
+    netaddr>=0.10.1  # Network address handling (ansible.utils, hetzner.hcloud)
+    netapp-lib  # NetApp ONTAP library (netapp.ontap)
+    paramiko  # Required for several networking modules (cisco.ios, cisco.asa, junipernetworks.junos)
+    pexpect>=4.5
+    protobuf  # Required for gRPC (ansible.netcommon)
+    psycopg2-binary  # PostgreSQL driver (community.postgresql)
+    pyOpenSSL
+    pyVmomi>=8.0.3.0.1  # VMware interaction (community.vmware, vmware.vmware)
+    # pykerberos
+    # pypsrp[kerberos,credssp]
+    pytest  # Testing framework (community.postgresql)
+    pytest-mock  # Mocking for pytest (community.postgresql)
+    python-daemon
+    python-dateutil  # Date/time handling (hetzner.hcloud)
+    python_freeipa
+    # pywinrm[kerberos,credssp]
+    pyyaml
+    receptorctl
+    requests  # HTTP requests (google.cloud, netapp.ontap)
+    requests-oauthlib  # OAuth handling for requests (community.okd, kubernetes.core)
+    six  # Python 2/3 compatibility library (netapp.ontap)
+    solidfire-sdk-python  # SolidFire SDK (netapp.ontap)
+    textfsm  # Text processing (ansible.utils)
+    toml
+    ttp  # Text-to-Parser template processing (ansible.utils)
+    vmware-vapi-common-client  # VMware API interaction (community.vmware)
+    vmware-vcenter  # VMware vCenter interaction (community.vmware)
+    xmltodict  # XML parsing (ansible.netcommon, ansible.utils, junipernetworks.junos)
