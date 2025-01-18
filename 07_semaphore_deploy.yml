@@ -78,9 +78,12 @@ spec:
               mountPath: /etc/semaphore
             - name: semaphore-tmp-config
               mountPath: /tmp/semaphore
-            - name: requirements
+            - name: requirements-txt
               mountPath: /etc/semaphore/requirements.txt
               subPath: requirements.txt
+            - name: requirements-yml
+              mountPath: /etc/semaphore/requirements.yml
+              subPath: requirements.yml
 
       volumes:
         - name: semaphore-tmp-config
@@ -91,11 +94,15 @@ spec:
         - name: semaphore-config
           persistentVolumeClaim:
             claimName: semaphore-config-pvc
-        - name: requirements
+        - name: requirements-txt
           configMap:
             name: semaphore-requirements
             items:
               - key: requirements.txt
                 path: requirements.txt
-
-
+        - name: requirements-yml
+          configMap:
+            name: semaphore-requirements
+            items:
+              - key: requirements.yml
+                path: requirements.yml

@@ -5,6 +5,63 @@ metadata:
   name: semaphore-requirements
   namespace: __NAMESPACE__
 data:
+  requirements.yml: |
+    collections:
+      - name: amazon.aws
+      - name: ansible.netcommon
+      - name: ansible.posix
+      - name: ansible.utils
+      - name: ansible.windows
+      - name: awx.awx
+      - name: azure.azcollection
+        version: ">=2.1.0"
+      - name: cisco.asa
+      - name: cisco.ios
+      - name: cisco.meraki
+      - name: community.aws
+      - name: community.ciscosmb
+      - name: community.crypto
+      - name: community.dns
+      - name: community.docker
+      - name: community.general
+      - name: community.hashi_vault
+      - name: community.libvirt
+      - name: community.mongodb
+      - name: community.mysql
+      - name: community.network
+      - name: community.okd
+      - name: community.postgresql
+      - name: community.rabbitmq
+      - name: community.vmware
+      - name: community.windows
+      - name: community.zabbix
+      - name: containers.podman
+      - name: dellemc.unity
+      - name: f5networks.f5_modules
+      - name: fortinet.fortimanager
+      - name: fortinet.fortios
+      - name: google.cloud
+      - name: hetzner.hcloud
+      - name: infoblox.nios_modules
+      - name: junipernetworks.junos
+      - name: kubernetes.core
+      - name: kubevirt.core
+      - name: netapp.ontap
+      - name: openstack.cloud
+      - name: ovirt.ovirt
+      - name: purestorage.flasharray
+      - name: purestorage.flashblade
+      - name: redhatinsights.insights
+      - name: splunk.es
+      - name: theforeman.foreman
+      - name: vmware.vmware
+      - name: vmware.vmware_rest
+    roles:
+      - src: https://github.com/joe-speedboat/ansible.os_update.git
+        scm: git
+        version: main
+        name: joe-speedboat.os_update
+      - name: joe-speedboat.template
   requirements.txt: |
     awxkit
     # ansible-pylibssh  # For SSH-based connections (ansible.netcommon, community.network, cisco.asa)
