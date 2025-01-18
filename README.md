@@ -82,11 +82,15 @@ DONE
 all templates created in ./runtime
 please review them and apply config
 
+kubectl create namespace $NAMESPACE
+kubectl config set-context --current --namespace=$NAMESPACE
+
 for y in *.yml
 do
-  echo \$y
-  kubectl apply -f \$y
-done"
+  echo runtime/\$y
+  kubectl apply -f runtime/\$y
+done
+"
 
 ```
 
