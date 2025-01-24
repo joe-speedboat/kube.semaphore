@@ -30,7 +30,7 @@ spec:
             - name: SEMAPHORE_WEB_ROOT
               value: "https://__SEMAPHORE_HOSTNAME__"
             - name: SEMAPHORE_USE_REMOTE_RUNNER
-              value: "True"
+              value: "False"
             - name: ANSIBLE_HOST_KEY_CHECKING
               value: "False"
             - name: MAX_TASK_DURATION_SEC
